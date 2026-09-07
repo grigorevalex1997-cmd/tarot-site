@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Таро · Арканы Судьбы</title>
+<meta name="description" content="Мистический мир карт Таро: интерактивный расклад, Старшие Арканы и их значения, история и мудрость древних символов." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 4l3 6 6 3-6 3-3 6-3-6-6-3 6-3z' fill='%23c9a227'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+:root,
+[data-theme='light'] {
+  --color-bg: #f3ecdd;
+  --color-surface: #efe7d2;
+  --color-surface-2: #f7f0e1;
+  --color-surface-offset: #e7dcc0;
+  --color-divider: #d8c9a3;
+  --color-border: #c9b585;
+
+  --color-text: #2c2113;
+  --color-text-muted: #6e5e42;
+  --color-text-faint: #9c8a60;
+  --color-text-inverse: #f3ecdd;
+
+  --color-primary: #8a5a12;
+  --color-primary-hover: #6d4609;
+  --color-gold: #a67c12;
+  --color-gold-soft: #c9a227;
+  --color-gold-bright: #e6c452;
+  --color-night: #1b1a2e;
+  --color-aurora-1: #2a3a8c;
+  --color-aurora-2: #6b3aa0;
+
+  --font-display: 'Cinzel', 'Trajan Pro', serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.83rem + 0.2vw, 1rem);
+  --text-base: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --text-lg: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
+  --text-xl: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --text-2xl: clamp(2.5rem, 1.4rem + 4vw, 4rem);
+  --text-hero: clamp(3.2rem, 0.4rem + 8vw, 8rem);
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem; --space-20: 5rem; --space-24: 6rem; --space-32: 8rem;
+
+  --radius-sm: 0.375rem; --radius-md: 0.5rem; --radius-lg: 0.75rem;
+  --radius-xl: 1rem; --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(40,30,10,0.12);
+  --shadow-md: 0 8px 24px rgba(40,30,10,0.16);
+  --shadow-lg: 0 24px 64px rgba(20,15,5,0.30);
+  --shadow-glow: 0 0 40px color-mix(in oklab, var(--color-gold) 45%, transparent);
+
+  --content-narrow: 680px; --content-default: 1080px; --content-wide: 1240px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-interactive: 220ms var(--ease-out);
+}
+
+[data-theme='dark'] {
+  --color-bg: #08070f;
+  --color-surface: #110f1e;
+  --color-surface-2: #171529;
+  --color-surface-offset: #1d1a35;
+  --color-divider: #2b2848;
+  --color-border: #383462;
+
+  --color-text: #ece5d2;
+  --color-text-muted: #a59d86;
+  --color-text-faint: #6f6a59;
+  --color-text-inverse: #110f1e;
+
+  --color-primary: #d4a73a;
+  --color-primary-hover: #e8b94c;
+  --color-gold: #c9a227;
+  --color-gold-soft: #e6c452;
+  --color-gold-bright: #f3d77a;
+  --color-night: #08070f;
+  --color-aurora-1: #3b2a8c;
+  --color-aurora-2: #7a3aa0;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.55);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,0.7);
+  --shadow-glow: 0 0 48px color-mix(in oklab, var(--color-gold) 55%, transparent);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--space-16);
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.65;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== Animated aurora background ===== */
+.aurora {
+  position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none;
+}
+.aurora__blob {
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5;
+  will-change: transform;
+}
+.aurora__blob--1 { width: 60vw; height: 60vw; top: -20%; left: -10%; background: var(--color-aurora-1); animation: drift1 22s var(--ease-in-out) infinite; }
+.aurora__blob--2 { width: 55vw; height: 55vw; top: 30%; right: -15%; background: var(--color-aurora-2); animation: drift2 28s var(--ease-in-out) infinite; }
+.aurora__blob--3 { width: 45vw; height: 45vw; bottom: -15%; left: 30%; background: color-mix(in oklab, var(--color-gold) 60%, var(--color-aurora-1)); opacity: 0.25; animation: drift3 25s var(--ease-in-out) infinite; }
+[data-theme='light'] .aurora__blob { opacity: 0.22; }
+@keyframes drift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(8vw,6vh) scale(1.12); } }
+@keyframes drift2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-6vw,8vh) scale(1.08); } }
+@keyframes drift3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(4vw,-8vh) scale(1.15); } }
+
+/* canvas starfield */
+.starfield { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
+
+/* custom cursor glow */
+.cursor-glow {
+  position: fixed; width: 460px; height: 460px; left: 0; top: 0;
+  transform: translate(-50%, -50%); pointer-events: none; z-index: -1;
+  background: radial-gradient(circle, color-mix(in oklab, var(--color-gold) 18%, transparent), transparent 65%);
+  transition: opacity 400ms var(--ease-out); opacity: 0;
+}
+@media (hover: hover) and (pointer: fine) { body:hover .cursor-glow { opacity: 1; } }
+
+img, picture, svg { display: block; max-width: 100%; height: auto; }
+ul[role='list'], ol[role='list'] { list-style: none; }
+input, button, textarea, select { font: inherit; color: inherit; }
+
+h1, h2, h3, h4 { text-wrap: balance; line-height: 1.1; font-family: var(--font-display); font-weight: 600; letter-spacing: 0.02em; }
+p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
+
+::selection { background: color-mix(in oklab, var(--color-gold) 35%, transparent); color: var(--color-text); }
+:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+button { cursor: pointer; background: none; border: none; }
+a, button, [role='button'] { transition: color var(--transition-interactive), background var(--transition-interactive), border-color var(--transition-interactive), box-shadow var(--transition-interactive), transform var(--transition-interactive), opacity var(--transition-interactive), filter var(--transition-interactive); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ===== Scroll reveal ===== */
+.reveal { opacity: 0; }
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-fade linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+  .reveal-clip { clip-path: inset(0 0 100% 0); animation: reveal-clip linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; opacity: 1; }
+}
+@keyframes reveal-fade { to { opacity: 1; } }
+@keyframes reveal-clip { to { clip-path: inset(0 0 0 0); } }
+/* JS fallback for browsers without scroll-timeline */
+html.no-viewtimelines .reveal { opacity: 1; }
+
+/* ===== Header ===== */
+.header {
+  position: sticky; top: 0; z-index: 60;
+  background: color-mix(in oklab, var(--color-bg) 62%, transparent);
+  backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid var(--color-divider);
+  transition: box-shadow var(--transition-interactive), background var(--transition-interactive);
+}
+.header--scrolled { box-shadow: var(--shadow-md); background: color-mix(in oklab, var(--color-bg) 80%, transparent); }
+.header__inner {
+  max-width: var(--content-wide); margin-inline: auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-4) clamp(var(--space-4), 4vw, var(--space-10));
+}
+.brand { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: var(--color-text); }
+.brand__mark { width: 30px; height: 30px; color: var(--color-gold); flex-shrink: 0; animation: spin-slow 36s linear infinite; }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.brand__name { font-family: var(--font-display); font-weight: 600; font-size: var(--text-lg); letter-spacing: 0.14em; }
+.brand__name span { color: var(--color-gold); }
+.nav { display: flex; align-items: center; gap: var(--space-6); }
+.nav__links { display: flex; gap: var(--space-6); }
+.nav__links a { text-decoration: none; color: var(--color-text-muted); font-size: var(--text-sm); letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-display); font-weight: 500; position: relative; }
+.nav__links a::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 1.5px; background: var(--color-gold); transition: width var(--transition-interactive); }
+.nav__links a:hover { color: var(--color-gold); }
+.nav__links a:hover::after { width: 100%; }
+.theme-toggle {
+  width: 40px; height: 40px; display: grid; place-items: center;
+  border-radius: var(--radius-full); border: 1px solid var(--color-border);
+  color: var(--color-text-muted); background: var(--color-surface);
+}
+.theme-toggle:hover { color: var(--color-gold); border-color: var(--color-gold); box-shadow: var(--shadow-glow); }
+.nav-toggle { display: none; width: 40px; height: 40px; place-items: center; border-radius: var(--radius-sm); color: var(--color-text); }
+
+@media (max-width: 760px) {
+  .nav__links { display: none; }
+  .nav-toggle { display: grid; }
+  .nav.open .nav__links {
+    display: flex; flex-direction: column; gap: var(--space-4);
+    position: absolute; top: 100%; right: clamp(var(--space-4), 4vw, var(--space-10));
+    left: clamp(var(--space-4), 4vw, var(--space-10));
+    background: color-mix(in oklab, var(--color-surface) 92%, transparent); backdrop-filter: blur(18px);
+    border: 1px solid var(--color-border); padding: var(--space-6); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative; min-height: clamp(640px, 100dvh, 1000px);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  overflow: hidden; isolation: isolate;
+}
+.hero__bg { position: absolute; inset: 0; z-index: -2; object-fit: cover; width: 100%; height: 100%; opacity: 0.85; will-change: transform; }
+[data-theme='light'] .hero__bg { opacity: 0.4; }
+.hero__veil {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 0%, color-mix(in oklab, var(--color-bg) 45%, transparent) 62%, var(--color-bg) 100%),
+    linear-gradient(in oklab, transparent 30%, color-mix(in oklab, var(--color-bg) 85%, transparent));
+}
+.hero__content { max-width: var(--content-narrow); padding: var(--space-12) var(--space-4); position: relative; z-index: 1; }
+.hero__eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.42em;
+  text-transform: uppercase; color: var(--color-gold); margin-bottom: var(--space-6);
+  opacity: 0; animation: rise 1s var(--ease-out) 0.2s forwards;
+}
+.hero__eyebrow::before, .hero__eyebrow::after { content: ''; width: 32px; height: 1px; background: var(--color-gold); opacity: 0.6; }
+.hero__title {
+  font-size: var(--text-hero); font-weight: 800; letter-spacing: 0.04em;
+  color: var(--color-gold-bright);
+  margin-bottom: var(--space-5); line-height: 0.95;
+  text-shadow: 0 0 60px color-mix(in oklab, var(--color-gold) 45%, transparent);
+}
+.hero__title .char { display: inline-block; opacity: 0; transform: translateY(0.5em) rotateX(60deg); transform-origin: bottom; animation: char-rise 0.9s var(--ease-out) forwards;
+  background: linear-gradient(in oklab, var(--color-gold-bright), var(--color-gold) 55%, var(--color-primary));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+}
+.hero__title .char.space { width: 0.3em; }
+@keyframes char-rise { to { opacity: 1; transform: translateY(0) rotateX(0); } }
+.hero__sub { font-size: var(--text-lg); color: var(--color-text-muted); font-style: italic; margin-bottom: var(--space-10); opacity: 0; animation: rise 1s var(--ease-out) 0.9s forwards; }
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+.hero__sub, .hero__eyebrow { transform: translateY(16px); }
+
+.hero__cta {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-4) var(--space-8); border-radius: var(--radius-full);
+  font-family: var(--font-display); font-size: var(--text-sm); letter-spacing: 0.18em;
+  text-transform: uppercase; text-decoration: none; font-weight: 600;
+  color: var(--color-night); background: linear-gradient(in oklab, var(--color-gold-bright), var(--color-gold));
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  opacity: 0; animation: rise 1s var(--ease-out) 1.1s forwards;
+  position: relative; overflow: hidden;
+}
+.hero__cta::before { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, color-mix(in oklab, #fff 50%, transparent) 50%, transparent 70%); transform: translateX(-120%); }
+.hero__cta:hover::before { transform: translateX(120%); transition: transform 0.9s var(--ease-out); }
+.hero__cta:hover { transform: translateY(-3px); filter: brightness(1.1); }
+.hero__cta svg { width: 16px; height: 16px; animation: bob 2.4s var(--ease-in-out) infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+
+.hero__scroll-hint { position: absolute; bottom: var(--space-6); left: 50%; transform: translateX(-50%); font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.3em; color: var(--color-text-faint); text-transform: uppercase; opacity: 0; animation: rise 1s var(--ease-out) 1.4s forwards; }
+
+/* ===== Section base ===== */
+.section { padding-block: clamp(var(--space-16), 8vw, var(--space-32)); position: relative; }
+.section__inner { max-width: var(--content-default); margin-inline: auto; padding-inline: clamp(var(--space-4), 4vw, var(--space-10)); }
+.section__head { text-align: center; max-width: var(--content-narrow); margin: 0 auto var(--space-16); }
+.section__eyebrow { font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.42em; text-transform: uppercase; color: var(--color-gold); margin-bottom: var(--space-4); display: inline-flex; align-items: center; gap: var(--space-3); }
+.section__eyebrow::before, .section__eyebrow::after { content: ''; width: 24px; height: 1px; background: var(--color-gold); opacity: 0.5; }
+.section__title { font-size: var(--text-2xl); margin-bottom: var(--space-5); font-weight: 700; }
+.section__title em { font-style: normal; color: var(--color-gold); position: relative; }
+.section__title em::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: linear-gradient(in oklab, transparent, var(--color-gold), transparent); }
+.section__lede { font-size: var(--text-lg); color: var(--color-text-muted); }
+
+/* ===== Draw / Reading ===== */
+.draw { background:
+  radial-gradient(circle at 15% 5%, color-mix(in oklab, var(--color-gold) 9%, transparent), transparent 42%),
+  radial-gradient(circle at 85% 95%, color-mix(in oklab, var(--color-aurora-2) 12%, transparent), transparent 45%),
+  var(--color-surface);
+  border-block: 1px solid var(--color-divider);
+}
+.draw__stage { display: flex; flex-direction: column; align-items: center; gap: var(--space-10); }
+.spread { display: flex; gap: clamp(var(--space-4), 4vw, var(--space-10)); flex-wrap: wrap; justify-content: center; perspective: 1600px; }
+
+.card {
+  position: relative; width: clamp(150px, 22vw, 210px); aspect-ratio: 2 / 3.4;
+  cursor: pointer; border: none;
+  transform-style: preserve-3d;
+}
+.card:hover .card__inner { box-shadow: var(--shadow-lg), var(--shadow-glow); }
+.card:hover .card__back { transform: scale(1.03); }
+.card__inner {
+  position: absolute; inset: 0; transform-style: preserve-3d;
+  transition: transform 1s var(--ease-out), box-shadow 0.6s var(--ease-out);
+  box-shadow: var(--shadow-md); border-radius: var(--radius-lg);
+}
+.card.flipped .card__inner { transform: rotateY(180deg); }
+.card.flipped { animation: pulse-glow 1s var(--ease-out); }
+@keyframes pulse-glow { 0% { filter: drop-shadow(0 0 0 transparent); } 40% { filter: drop-shadow(0 0 24px var(--color-gold)); } 100% { filter: drop-shadow(0 0 0 transparent); } }
+.card__face, .card__back {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-lg); overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform 0.6s var(--ease-out);
+}
+.card__back {
+  background: var(--color-night); border: 1px solid var(--color-border);
+  padding: var(--space-3);
+}
+.card__back::before { content: ''; position: absolute; inset: var(--space-3); border: 1px solid color-mix(in oklab, var(--color-gold) 45%, transparent); border-radius: var(--radius-md); }
+.card__back-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.92; }
+.card__back-mark { position: relative; margin: auto; z-index: 2; color: var(--color-gold-soft); width: 38%; filter: drop-shadow(0 0 14px color-mix(in oklab, var(--color-gold) 60%, transparent)); }
+.card__face {
+  transform: rotateY(180deg);
+  background: radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--color-gold) 14%, var(--color-surface-2)), var(--color-surface-offset));
+  border: 1px solid var(--color-gold); padding: var(--space-4) var(--space-3);
+}
+.card__face::before { content: ''; position: absolute; inset: 6px; border: 1px solid color-mix(in oklab, var(--color-gold) 35%, transparent); border-radius: var(--radius-md); pointer-events: none; }
+.card__emblem { width: 100%; flex: 1; display: grid; place-items: center; color: var(--color-gold); }
+.card__emblem svg { width: 62%; height: auto; }
+.card.flipped .card__emblem svg { animation: emblem-in 0.8s var(--ease-out) 0.3s both; }
+@keyframes emblem-in { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+.card__num { font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.2em; color: var(--color-gold); text-align: center; }
+.card__name { font-family: var(--font-display); font-size: var(--text-sm); letter-spacing: 0.1em; text-align: center; color: var(--color-text); margin-top: var(--space-1); }
+.card.flipped .card__name { animation: rise 0.6s var(--ease-out) 0.5s both; }
+.card.flipped .card__num { animation: rise 0.6s var(--ease-out) 0.4s both; }
+
+.draw__panel {
+  width: 100%; max-width: var(--content-narrow); text-align: center;
+  min-height: 8em;
+  padding: var(--space-8) var(--space-6); border-radius: var(--radius-xl);
+  background: color-mix(in oklab, var(--color-surface-2) 80%, transparent); backdrop-filter: blur(8px);
+  border: 1px solid var(--color-divider);
+  position: relative; overflow: hidden;
+}
+.draw__panel::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, color-mix(in oklab, var(--color-gold) 10%, transparent), transparent 60%); pointer-events: none; }
+.draw__panel > * { position: relative; }
+.draw__panel .card-title { font-size: var(--text-xl); color: var(--color-gold); margin-bottom: var(--space-2); animation: rise 0.6s var(--ease-out) both; }
+.draw__panel .card-keyword { font-style: italic; color: var(--color-text-muted); margin-bottom: var(--space-4); animation: rise 0.6s var(--ease-out) 0.1s both; }
+.draw__panel .card-meaning { color: var(--color-text); animation: rise 0.6s var(--ease-out) 0.2s both; }
+.draw__hint { font-size: var(--text-sm); color: var(--color-text-faint); letter-spacing: 0.08em; font-family: var(--font-display); text-transform: uppercase; }
+.draw__reset { margin-top: var(--space-2); padding: var(--space-3) var(--space-6); border-radius: var(--radius-full); font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-gold); border: 1px solid var(--color-border); background: var(--color-surface); }
+.draw__reset:hover { border-color: var(--color-gold); color: var(--color-gold-soft); box-shadow: var(--shadow-glow); }
+
+/* ===== Synthesis (overall reading) ===== */
+.synthesis {
+  width: 100%; max-width: var(--content-narrow); text-align: center;
+  padding: var(--space-10) var(--space-6) var(--space-8); border-radius: var(--radius-xl);
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--color-gold) 14%, transparent), transparent 65%),
+    color-mix(in oklab, var(--color-surface-2) 86%, transparent);
+  backdrop-filter: blur(8px); border: 1px solid var(--color-gold);
+  box-shadow: var(--shadow-lg), var(--shadow-glow); position: relative; overflow: hidden;
+}
+.synthesis[hidden] { display: none; }
+.synthesis { transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+.synthesis__eyebrow { font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.42em; text-transform: uppercase; color: var(--color-gold); margin-bottom: var(--space-3); animation: rise 0.6s var(--ease-out) both; }
+.synthesis__title { font-size: var(--text-xl); margin-bottom: var(--space-6); animation: rise 0.6s var(--ease-out) 0.05s both; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-bottom: var(--space-8); }
+.chip { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); min-width: 7.5em; padding: var(--space-4) var(--space-3); border-radius: var(--radius-lg); background: color-mix(in oklab, var(--color-surface-offset) 70%, transparent); border: 1px solid var(--color-divider); animation: rise 0.6s var(--ease-out) both; cursor: pointer; transition: border-color var(--transition-interactive), transform var(--transition-interactive), box-shadow var(--transition-interactive); }
+.chip:hover { border-color: var(--color-gold); transform: translateY(-3px); box-shadow: var(--shadow-glow); }
+.chip__pos { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-text-faint); }
+.chip__name { font-family: var(--font-display); font-size: var(--text-sm); letter-spacing: 0.04em; color: var(--color-gold); }
+.chip__kw { font-size: var(--text-xs); font-style: italic; color: var(--color-text-muted); }
+.synthesis__text { color: var(--color-text); font-size: var(--text-lg); animation: rise 0.6s var(--ease-out) 0.2s both; }
+.synthesis__text b { color: var(--color-gold); font-weight: 600; }
+.synthesis__advice { margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid var(--color-divider); color: var(--color-text-muted); font-style: italic; animation: rise 0.6s var(--ease-out) 0.3s both; }
+.synthesis__advice::before { content: '◆ '; color: var(--color-gold); font-style: normal; }
+
+/* ===== Arcana gallery ===== */
+.gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-6); }
+.mini-card {
+  position: relative; aspect-ratio: 2 / 3.4; border-radius: var(--radius-md);
+  overflow: hidden; cursor: pointer; border: 1px solid var(--color-divider);
+  background: radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--color-gold) 12%, var(--color-surface-2)), var(--color-surface-offset));
+  transition: transform var(--transition-interactive), box-shadow var(--transition-interactive), border-color var(--transition-interactive);
+  transform-style: preserve-3d;
+}
+.mini-card:hover { transform: translateY(-8px) rotateX(6deg); box-shadow: var(--shadow-lg), var(--shadow-glow); border-color: var(--color-gold); }
+.mini-card::after { content: ''; position: absolute; inset: 5px; border: 1px solid color-mix(in oklab, var(--color-gold) 30%, transparent); border-radius: var(--radius-sm); pointer-events: none; }
+.mini-card__emblem { position: absolute; inset: 0; display: grid; place-items: center; color: var(--color-gold); padding: var(--space-6); transition: transform var(--transition-interactive); }
+.mini-card:hover .mini-card__emblem { transform: scale(1.08); }
+.mini-card__emblem svg { width: 70%; }
+.mini-card__num { position: absolute; top: var(--space-3); left: 0; right: 0; text-align: center; font-family: var(--font-display); font-size: 10px; letter-spacing: 0.2em; color: var(--color-gold); }
+.mini-card__name { position: absolute; bottom: var(--space-3); left: 0; right: 0; text-align: center; font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.08em; color: var(--color-text); }
+
+/* ===== Modal ===== */
+.modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: var(--space-4); }
+.modal.open { display: flex; }
+.modal__overlay { position: absolute; inset: 0; background: rgba(5,4,12,0.7); backdrop-filter: blur(8px); animation: fade-in 0.3s var(--ease-out); }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.modal__box {
+  position: relative; max-width: 480px; width: 100%; padding: var(--space-10) var(--space-8) var(--space-8);
+  border-radius: var(--radius-xl); background: color-mix(in oklab, var(--color-surface) 96%, transparent); backdrop-filter: blur(20px);
+  border: 1px solid var(--color-gold); box-shadow: var(--shadow-lg), var(--shadow-glow);
+  text-align: center; animation: modal-in 0.5s var(--ease-out);
+}
+@keyframes modal-in { from { opacity: 0; transform: scale(0.92) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.modal__close { position: absolute; top: var(--space-3); right: var(--space-3); width: 36px; height: 36px; display: grid; place-items: center; border-radius: var(--radius-full); color: var(--color-text-muted); }
+.modal__close:hover { color: var(--color-gold); transform: rotate(90deg); }
+.modal__emblem { width: 80px; margin: 0 auto var(--space-4); color: var(--color-gold); animation: emblem-in 0.6s var(--ease-out) 0.15s both; }
+.modal__num { font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.2em; color: var(--color-gold); animation: rise 0.5s var(--ease-out) 0.2s both; }
+.modal__name { font-size: var(--text-xl); margin: var(--space-1) 0 var(--space-2); animation: rise 0.5s var(--ease-out) 0.25s both; }
+.modal__keyword { font-style: italic; color: var(--color-text-muted); margin-bottom: var(--space-4); animation: rise 0.5s var(--ease-out) 0.3s both; }
+.modal__meaning { color: var(--color-text); animation: rise 0.5s var(--ease-out) 0.35s both; }
+.modal__pair { display: flex; justify-content: center; gap: var(--space-8); margin-top: var(--space-6); font-size: var(--text-sm); animation: rise 0.5s var(--ease-out) 0.4s both; }
+.modal__pair > div { flex: 1; }
+.modal__pair .label { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-faint); margin-bottom: var(--space-1); }
+
+/* ===== About ===== */
+.about { background: var(--color-surface); border-block: 1px solid var(--color-divider); }
+.about__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(var(--space-8), 6vw, var(--space-16)); align-items: center; }
+@media (max-width: 820px) { .about__grid { grid-template-columns: 1fr; } }
+.about__title { font-size: var(--text-xl); margin-bottom: var(--space-5); color: var(--color-gold); }
+.about__text { color: var(--color-text-muted); font-size: var(--text-lg); }
+.about__text p + p { margin-top: var(--space-4); }
+.about__list { display: grid; gap: var(--space-6); }
+.about__card { padding: var(--space-6); border-radius: var(--radius-lg); background: var(--color-surface-2); border: 1px solid var(--color-divider); transition: border-color var(--transition-interactive), transform var(--transition-interactive); position: relative; overflow: hidden; }
+.about__card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(in oklab, var(--color-gold-soft), transparent); transform: scaleY(0); transform-origin: top; transition: transform 0.4s var(--ease-out); }
+.about__card:hover { border-color: var(--color-gold); transform: translateX(4px); }
+.about__card:hover::before { transform: scaleY(1); }
+.about__card h3 { font-size: var(--text-base); color: var(--color-gold); margin-bottom: var(--space-2); letter-spacing: 0.06em; }
+.about__card p { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+/* ===== Suits ===== */
+.suits { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-top: var(--space-10); }
+@media (max-width: 640px) { .suits { grid-template-columns: repeat(2, 1fr); } }
+.suit { padding: var(--space-6) var(--space-4); border-radius: var(--radius-lg); background: var(--color-surface-2); border: 1px solid var(--color-divider); text-align: center; transition: border-color var(--transition-interactive), transform var(--transition-interactive), box-shadow var(--transition-interactive); }
+.suit:hover { border-color: var(--color-gold); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+.suit__icon { width: 34px; height: 34px; margin: 0 auto var(--space-3); color: var(--color-gold); transition: transform var(--transition-interactive); }
+.suit:hover .suit__icon { transform: scale(1.15) rotate(-6deg); }
+.suit__name { font-family: var(--font-display); font-size: var(--text-sm); letter-spacing: 0.08em; margin-bottom: var(--space-1); }
+.suit__desc { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+/* ===== Footer ===== */
+.footer { padding-block: var(--space-16) var(--space-12); border-top: 1px solid var(--color-divider); position: relative; }
+.footer__inner { max-width: var(--content-wide); margin-inline: auto; padding-inline: clamp(var(--space-4), 4vw, var(--space-10)); display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: center; justify-content: space-between; }
+.footer__brand { display: flex; align-items: center; gap: var(--space-3); color: var(--color-text); }
+.footer__brand svg { width: 28px; color: var(--color-gold); }
+.footer__brand b { font-family: var(--font-display); letter-spacing: 0.12em; }
+.footer__note { font-size: var(--text-sm); color: var(--color-text-faint); font-style: italic; max-width: 42ch; }
+
+/* divider ornament */
+.ornament { display: flex; align-items: center; justify-content: center; gap: var(--space-4); margin: var(--space-8) auto; color: var(--color-gold); opacity: 0.7; }
+.ornament svg { width: 22px; animation: spin-slow 24s linear infinite; }
+.ornament::before, .ornament::after { content: ''; height: 1px; width: clamp(40px, 12vw, 120px); background: linear-gradient(in oklab, transparent, var(--color-gold), transparent); }
+</style>
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="aurora__blob aurora__blob--1"></div>
+  <div class="aurora__blob aurora__blob--2"></div>
+  <div class="aurora__blob aurora__blob--3"></div>
+</div>
+<canvas class="starfield" id="starfield" aria-hidden="true"></canvas>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header__inner">
+    <a href="#top" class="brand" aria-label="Таро — на главную">
+      <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M16 3l3.2 6.5L26 11l-5.4 5.2L22 24l-6-3.4L10 24l1.4-7.8L6 11l6.8-1.5L16 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+        <circle cx="16" cy="15" r="1.6" fill="currentColor"/>
+      </svg>
+      <span class="brand__name">Арка<span>нум</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <ul class="nav__links" role="list">
+        <li><a href="#draw">Расклад</a></li>
+        <li><a href="#arcana">Арканы</a></li>
+        <li><a href="#about">О Таро</a></li>
+      </ul>
+      <button class="theme-toggle" data-theme-toggle aria-label="Сменить тему">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Меню" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero__bg" id="heroBg" src="hero-cosmos.webp" alt="" loading="eager" />
+  <div class="hero__veil"></div>
+  <div class="hero__content">
+    <div class="hero__eyebrow">Тайны Старших Арканов</div>
+    <h1 class="hero__title" id="heroTitle">Таро</h1>
+    <p class="hero__sub">Древний язык символов, что шепчет о прошлом, настоящем и ещё не случившемся.</p>
+    <a href="#draw" class="hero__cta" id="heroCta">
+      Приоткрыть завесу
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v14M6 11l6 6 6-6"/></svg>
+    </a>
+  </div>
+  <div class="hero__scroll-hint">Прокрутите вниз</div>
+</section>
+
+<!-- DRAW -->
+<section class="section draw" id="draw">
+  <div class="section__inner">
+    <div class="section__head reveal">
+      <div class="section__eyebrow">Интерактивный расклад</div>
+      <h2 class="section__title">Три <em>карты</em> судьбы</h2>
+      <p class="section__lede">Сосредоточьтесь на своём вопросе, сделайте вдох и коснитесь карты. Прошлое, настоящее и путь вперед откроются одна за другой.</p>
+    </div>
+
+    <div class="draw__stage">
+      <div class="spread reveal" id="spread" role="group" aria-label="Карты для расклада">
+      </div>
+
+      <div class="draw__panel reveal" id="reading" aria-live="polite">
+        <p class="draw__hint" id="hint">Коснитесь карты, чтобы открыть её значение</p>
+      </div>
+
+      <div class="synthesis reveal" id="synthesis" hidden>
+        <div class="synthesis__eyebrow">Общий расклад</div>
+        <h3 class="synthesis__title">Синтез трёх карт</h3>
+        <div class="chips" id="chips" role="list"></div>
+        <p class="synthesis__text" id="synthesisText"></p>
+        <p class="synthesis__advice" id="synthesisAdvice"></p>
+      </div>
+
+      <button class="draw__reset" id="reset" style="display:none">Перемешать колоду</button>
+    </div>
+  </div>
+</section>
+
+<!-- ORNAMENT -->
+<div class="ornament reveal" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>
+</div>
+
+<!-- ARCANA GALLERY -->
+<section class="section" id="arcana">
+  <div class="section__inner">
+    <div class="section__head reveal">
+      <div class="section__eyebrow">Галерея</div>
+      <h2 class="section__title">Старшие <em>Арканы</em></h2>
+      <p class="section__lede">Двадцать два символа, описывающих странствие души — от невинного Шута до завершённого Мира.</p>
+    </div>
+    <div class="gallery__grid" id="gallery" role="list">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about" id="about">
+  <div class="section__inner">
+    <div class="about__grid">
+      <div class="reveal">
+        <div class="section__eyebrow">Мудрость символов</div>
+        <h2 class="about__title">Что такое Таро</h2>
+        <div class="about__text">
+          <p>Таро — это не предсказание будущего, а зеркало. Семьдесят восемь карт складываются в систему символов, в которой отражаются ваши мысли, страхи и надежды. Каждая карта — архетип, понятный бессознательному вне слов.</p>
+          <p>Старшие Арканы ведут сквозь двадцать два порога человеческого опыта. Младшие — описывают будничные ритмы. Вместе они образуют язык, на котором душа говорит сама с собой.</p>
+        </div>
+      </div>
+      <div class="about__list">
+        <div class="about__card reveal"><h3>Задайте вопрос</h3><p>Формулируйте открытый, честный вопрос. Не «что мне делать?», а «что мне важно увидеть?».</p></div>
+        <div class="about__card reveal"><h3>Сосредоточьтесь</h3><p>Сделайте вдох, отпустите мысли. Карта ответит на то, что вы принесли с собой.</p></div>
+        <div class="about__card reveal"><h3>Прочитайте образ</h3><p>Сначала — что вы чувствуете, глядя на карту. Значение рождается между символом и вами.</p></div>
+      </div>
+    </div>
+
+    <div class="suits reveal" aria-label="Младшие масти">
+      <div class="suit">
+        <svg class="suit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>
+        <div class="suit__name">Кубки</div>
+        <div class="suit__desc">Эмоции, чувства, любовь</div>
+      </div>
+      <div class="suit">
+        <svg class="suit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+        <div class="suit__name">Жезлы</div>
+        <div class="suit__desc">Действие, страсть, воля</div>
+      </div>
+      <div class="suit">
+        <svg class="suit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h5v8h8v-8h5L13 2z"/></svg>
+        <div class="suit__name">Мечи</div>
+        <div class="suit__desc">Разум, конфликт, истина</div>
+      </div>
+      <div class="suit">
+        <svg class="suit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c-5 0-9-3-9-7 0-3 2-5 4-7-1 3 0 5 2 5 0-4 3-6 3-9 0-2 0-2 0-2 4 3 7 6 7 11 0 4-4 9-7 9z"/></svg>
+        <div class="suit__name">Пентакли</div>
+        <div class="suit__desc">Материя, труд, достаток</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3l3.2 6.5L26 11l-5.4 5.2L22 24l-6-3.4L10 24l1.4-7.8L6 11l6.8-1.5L16 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <b>АРКАНУМ</b>
+    </div>
+    <p class="footer__note">Карты Таро — инструмент размышления и самопознания, а не предсказания. Доверьтесь собственной мудрости.</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+  <div class="modal__overlay" data-close></div>
+  <div class="modal__box">
+    <button class="modal__close" data-close aria-label="Закрыть">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="modal__emblem" id="modalEmblem"></div>
+    <div class="modal__num" id="modalNum"></div>
+    <h3 class="modal__name" id="modalName"></h3>
+    <p class="modal__keyword" id="modalKeyword"></p>
+    <p class="modal__meaning" id="modalMeaning"></p>
+    <div class="modal__pair">
+      <div><div class="label">Прямое</div><span id="modalUp"></span></div>
+      <div><div class="label">Перевёрнутое</div><span id="modalRev"></span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== Card data ===== */
+const CARDS = [
+  { num: '0', name: 'Шут', keyword: 'Невинность, начало', essence: 'свежий старт', advice: 'довериться новому шагу', meaning: 'Новый путь открывается. Карта доверия к неизвестному и готовности шагнуть за край. Спросите себя: от чего вы готовы отказаться ради свободы?', upright: 'Свобода, риск, доверие', reversed: 'Безрассудство, наивность' },
+  { num: 'I', name: 'Маг', keyword: 'Воля, мастерство', essence: 'сила воли', advice: 'привести замысел в действие', meaning: 'В ваших руках все стихии — воля, эмоция, разум, материя. Вы способны воплотить задуманное, если соедините намерение с действием.', upright: 'Умение, инициатива', reversed: 'Манипуляция, сомнения' },
+  { num: 'II', name: 'Жрица', keyword: 'Интуиция, тайна', essence: 'внутренний голос', advice: 'слушать тишину внутри', meaning: 'Тихий голос внутри знает ответ. Эта карта зовёт слушать не разум, а внутреннее знание. То, что скрыто, вскоре проявится.', upright: 'Мудрость, тайны', reversed: 'Скрытность, оторванность' },
+  { num: 'III', name: 'Императрица', keyword: 'Изобилие, плодородие', essence: 'рост и забота', advice: 'питать то, что создаёте', meaning: 'Время роста и творчества. Жизнь щедра, когда вы позволяете себе получать. Проявите заботу — к себе и к тому, что создаете.', upright: 'Рост, забота, изобилие', reversed: 'Зависимость, застой' },
+  { num: 'IV', name: 'Император', keyword: 'Структура, власть', essence: 'порядок и опора', advice: 'выстроить прочную основу', meaning: 'Опора и порядок. Карта говорит о необходимости правил, границ и дисциплины. Власть приходит через ответственность, а не силу.', upright: 'Стабильность, контроль', reversed: 'Жёсткость, деспотизм' },
+  { num: 'V', name: 'Иерофант', keyword: 'Традиция, вера', essence: 'смысл и традиция', advice: 'искать высшую истину', meaning: 'Поиск высшего смысла в устоявшихся формах. Иногда мудрость передаётся через традицию. Но проверяйте — ваша ли это истина.', upright: 'Учение, духовность', reversed: 'Догматизм, бунт' },
+  { num: 'VI', name: 'Влюблённые', keyword: 'Выбор, союз', essence: 'выбор сердца', advice: 'решить по любви', meaning: 'Карта не только любви, но и выбора сердца. Решение, которое определит путь. Прислушайтесь к тому, что по-настоящему важно.', upright: 'Любовь, гармония', reversed: 'Разлад, нерешительность' },
+  { num: 'VII', name: 'Колесница', keyword: 'Воля, победа', essence: 'движение вперёд', advice: 'взять поводья в свои руки', meaning: 'Движение вперёд через самоконтроль. Две силы тянут в разные стороны — лишь воля направит их к цели. Не отпускайте поводья.', upright: 'Триумф, решимость', reversed: 'Потеря направления' },
+  { num: 'VIII', name: 'Сила', keyword: 'Мужество, мягкость', essence: 'мягкое мужество', advice: 'быть добрым, но твёрдым', meaning: 'Истинная сила — не грубая, а тихая. Карта укрощения зверя внутри через сострадание. Будьте тверды с собой, но добры.', upright: 'Внутренняя сила', reversed: 'Сомнение, слабость' },
+  { num: 'IX', name: 'Отшельник', keyword: 'Поиск, уединение', essence: 'тишина и поиск', advice: 'уйти внутрь себя', meaning: 'Время отойти в тишину и прислушаться. Ответ приходит не снаружи, а из глубины. Ваш внутренний свет освещает путь.', upright: 'Мудрость, поиск', reversed: 'Изоляция, гордыня' },
+  { num: 'X', name: 'Колесо Фортуны', keyword: 'Перемены, цикл', essence: 'перемены', advice: 'довериться течению', meaning: 'Всё движется по кругу. То, что было внизу, поднимется. Карта напоминает: и хорошее, и трудное — проходит. Доверьтесь течению.', upright: 'Судьба, поворот', reversed: 'Сопротивление, застой' },
+  { num: 'XVII', name: 'Звезда', keyword: 'Надежда, вдохновение', essence: 'надежда', advice: 'открыться свету', meaning: 'После бури — свет. Карта веры и исцеления. Надежда ведёт через тьму. Откройтесь тому, что питает вашу душу.', upright: 'Вера, обновление', reversed: 'Отчаяние, оторванность' },
+  { num: 'XVIII', name: 'Луна', keyword: 'Иллюзия, интуиция', essence: 'иллюзии и тени', advice: 'прояснить, что реально', meaning: 'Не всё так, как кажется. Страхи и сны говорят громче разума. Не действуйте поспешно — проясните сначала, что реально.', upright: 'Тайны, сны', reversed: 'Смятение, страх' },
+  { num: 'XIX', name: 'Солнце', keyword: 'Радость, ясность', essence: 'радость', advice: 'жить при свете', meaning: 'Ясность и тепло. Карта успеха и подлинного счастья. Всё, что было скрыто в тени, выходит на свет. Радуйтесь без оглядки.', upright: 'Радость, успех', reversed: 'Эгоизм, задержка' },
+  { num: 'XXI', name: 'Мир', keyword: 'Завершение, целостность', essence: 'завершение', advice: 'принять целостность', meaning: 'Круг замкнулся. Вы прошли путь и стали целостнее. Завершение одного цикла открывает начало следующего. Празднуйте достижение.', upright: 'Завершение, единство', reversed: 'Незавершённость' },
+];
+
+const EMBLEMS = {
+  '0': '<circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M50 30v-18M50 70v18M30 50h-18M70 50h18" stroke="currentColor" stroke-width="1.5"/><path d="M50 50c-8-8-8-18 0-26 8 8 8 18 0 26z" fill="currentColor" opacity="0.5"/><circle cx="50" cy="42" r="3" fill="currentColor"/>',
+  'I': '<path d="M50 20v40" stroke="currentColor" stroke-width="2"/><path d="M50 30l-14-8M50 30l14-8M50 45l-16-9M50 45l16-9M50 60l-14-8M50 60l14-8" stroke="currentColor" stroke-width="1.4"/><path d="M50 20l-6-8h12l-6 8z" fill="currentColor"/>',
+  'II': '<rect x="38" y="22" width="24" height="48" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M42 34h16M42 44h16M42 54h16" stroke="currentColor" stroke-width="1.2"/><circle cx="50" cy="28" r="2" fill="currentColor"/>',
+  'III': '<path d="M50 30c10 0 16 8 16 18 0 12-10 22-16 26-6-4-16-14-16-26 0-10 6-18 16-18z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="44" cy="44" r="3" fill="currentColor"/><path d="M50 26v8M38 36l6 2M62 36l-6 2" stroke="currentColor" stroke-width="1.3"/>',
+  'IV': '<path d="M40 30v-8h20v8M36 30h28v6H36zM50 36v34M44 70h12" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="50" cy="24" r="3" fill="currentColor"/>',
+  'V': '<path d="M50 22v56M30 78h40" stroke="currentColor" stroke-width="1.6"/><path d="M44 28l6-6 6 6M40 36l10-10 10 10M44 44l6-6 6 6" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="50" cy="78" r="4" fill="none" stroke="currentColor" stroke-width="1.4"/>',
+  'VI': '<path d="M50 38c-8-10-18-6-18 4 0 8 12 18 18 24 6-6 18-16 18-24 0-10-10-14-18-4z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M50 22v10M44 30l6-8 6 8" stroke="currentColor" stroke-width="1.4" fill="none"/>',
+  'VII': '<path d="M30 50h40M50 30v40" stroke="currentColor" stroke-width="1.6"/><circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M50 28a22 22 0 0 1 22 22" stroke="currentColor" stroke-width="2.4" fill="none"/><path d="M50 72a22 22 0 0 1-22-22" stroke="currentColor" stroke-width="2.4" fill="none"/>',
+  'VIII': '<path d="M50 50c-8-8-8-18 0-26 8 8 8 18 0 26z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M50 50c8 8 8 18 0 26-8-8-8-18 0-26z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M50 24v52" stroke="currentColor" stroke-width="1.4"/>',
+  'IX': '<circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M50 30v-12M50 70v12M30 50h-12M70 50h12" stroke="currentColor" stroke-width="1.4"/><path d="M50 50l8-8M50 50l-8 8" stroke="currentColor" stroke-width="1.3"/>',
+  'X': '<circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M50 28a22 22 0 0 1 22 22" stroke="currentColor" stroke-width="2.6" fill="none"/><path d="M28 50h44M50 28v44" stroke="currentColor" stroke-width="1"/>',
+  'XVII': '<path d="M50 24l4 12 12 4-12 4-4 12-4-12-12-4 12-4z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M50 60v8M44 66h12M42 72h16" stroke="currentColor" stroke-width="1.4"/>',
+  'XVIII': '<path d="M30 78a20 20 0 0 1 0-40 16 16 0 0 1 8-2 16 16 0 0 1 24 6 18 18 0 0 1 8 36z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M64 32a10 10 0 0 0-10-10 10 10 0 0 0-10 10" fill="none" stroke="currentColor" stroke-width="1.3"/>',
+  'XIX': '<circle cx="50" cy="50" r="14" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M50 18v8M50 74v8M18 50h8M74 50h8M27 27l6 6M67 67l6 6M73 27l-6 6M33 67l-6 6" stroke="currentColor" stroke-width="1.5"/>',
+  'XXI': '<ellipse cx="50" cy="50" rx="26" ry="12" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="50" cy="50" rx="12" ry="26" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="50" cy="50" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/>',
+};
+
+const emblem = (num) => `<svg viewBox="0 0 100 100" fill="none">${EMBLEMS[num] || EMBLEMS['0']}</svg>`;
+
+/* ===== Hero title: split into chars ===== */
+(function () {
+  const t = document.getElementById('heroTitle');
+  const text = t.textContent.trim();
+  t.innerHTML = '';
+  text.split('').forEach((c, i) => {
+    const span = document.createElement('span');
+    span.className = 'char' + (c === ' ' ? ' space' : '');
+    span.textContent = c === ' ' ? '\u00A0' : c;
+    span.style.animationDelay = (0.35 + i * 0.08) + 's';
+    t.appendChild(span);
+  });
+})();
+
+/* ===== Starfield canvas ===== */
+(function () {
+  const canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ctx = canvas.getContext('2d');
+  let w, h, stars = [], shooting = [];
+  const DPR = Math.min(devicePixelRatio || 1, 2);
+
+  function resize() {
+    w = innerWidth; h = innerHeight;
+    canvas.width = w * DPR; canvas.height = h * DPR;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    const count = Math.round((w * h) / 9000);
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: Math.random() * 1.4 + 0.3,
+      a: Math.random() * 0.8 + 0.2,
+      tw: Math.random() * Math.PI * 2,
+      sp: Math.random() * 0.04 + 0.01,
+    }));
+  }
+  resize();
+  addEventListener('resize', resize);
+
+  function spawnShoot() {
+    if (reduce) return;
+    const fromLeft = Math.random() > 0.5;
+    shooting.push({
+      x: fromLeft ? -20 : w + 20,
+      y: Math.random() * h * 0.5,
+      vx: (fromLeft ? 1 : -1) * (Math.random() * 4 + 5),
+      vy: Math.random() * 2 + 1.5,
+      life: 1,
+    });
+  }
+
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  addEventListener('mousemove', (e) => { tx = (e.clientX / w - 0.5) * 2; ty = (e.clientY / h - 0.5) * 2; });
+  addEventListener('scroll', () => { ty = (scrollY / h) * 0.4; });
+
+  let last = performance.now(), shootTimer = 0;
+  function frame(now) {
+    const dt = Math.min((now - last) / 16.7, 3); last = now;
+    mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
+    ctx.clearRect(0, 0, w, h);
+    const gold = getComputedStyle(document.documentElement).getPropertyValue('--color-gold-soft').trim() || '#e6c452';
+
+    for (const s of stars) {
+      s.tw += s.sp * dt;
+      const tw = (Math.sin(s.tw) + 1) * 0.5;
+      const alpha = s.a * (0.35 + tw * 0.65);
+      const px = s.x + mx * s.r * 6;
+      const py = s.y + my * s.r * 6;
+      ctx.beginPath();
+      ctx.arc(px, py, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(230,196,82,${alpha})`;
+      ctx.fill();
+      if (s.r > 1) { ctx.beginPath(); ctx.arc(px, py, s.r * 2.4, 0, Math.PI * 2); ctx.fillStyle = `rgba(230,196,82,${alpha * 0.12})`; ctx.fill(); }
+    }
+
+    shootTimer += dt;
+    if (shootTimer > 120 && Math.random() < 0.03) { spawnShoot(); shootTimer = 0; }
+    shooting = shooting.filter(s => {
+      s.x += s.vx * dt; s.y += s.vy * dt; s.life -= 0.012 * dt;
+      if (s.life <= 0) return false;
+      const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 8, s.y - s.vy * 8);
+      grad.addColorStop(0, `rgba(255,240,200,${s.life})`);
+      grad.addColorStop(1, 'rgba(255,240,200,0)');
+      ctx.strokeStyle = grad; ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - s.vx * 8, s.y - s.vy * 8); ctx.stroke();
+      return true;
+    });
+
+    requestAnimationFrame(frame);
+  }
+  if (!reduce) requestAnimationFrame(frame); else { /* draw once */ ctx.clearRect(0,0,w,h); for (const s of stars) { ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle='rgba(230,196,82,0.6)'; ctx.fill(); } }
+})();
+
+/* ===== Cursor glow ===== */
+(function () {
+  const g = document.getElementById('cursorGlow');
+  if (!g) return;
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  let x = 0, y = 0, cx = 0, cy = 0;
+  addEventListener('mousemove', (e) => { x = e.clientX; y = e.clientY; });
+  function loop() { cx += (x - cx) * 0.15; cy += (y - cy) * 0.15; g.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; requestAnimationFrame(loop); }
+  loop();
+})();
+
+/* ===== Hero parallax ===== */
+(function () {
+  const bg = document.getElementById('heroBg');
+  if (!bg) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  addEventListener('scroll', () => {
+    const y = scrollY;
+    if (y < innerHeight) bg.style.transform = `translateY(${y * 0.3}px) scale(1.05)`;
+  }, { passive: true });
+})();
+
+/* ===== Build draw spread ===== */
+const SPREAD_LABELS = ['Прошлое', 'Настоящее', 'Путь вперёд'];
+const spreadEl = document.getElementById('spread');
+let drawOrder = [];
+
+function buildSpread() {
+  spreadEl.innerHTML = '';
+  drawOrder = [...CARDS].sort(() => Math.random() - 0.5).slice(0, 3);
+  drawOrder.forEach((card, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'card';
+    btn.dataset.idx = i;
+    btn.style.opacity = '0';
+    btn.style.transform = 'translateY(30px) rotateY(8deg)';
+    btn.style.transition = 'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+    btn.style.transitionDelay = (0.15 + i * 0.15) + 's';
+    btn.setAttribute('aria-label', `Карта ${SPREAD_LABELS[i]}`);
+    btn.innerHTML = `
+      <div class="card__inner">
+        <div class="card__back">
+          <img class="card__back-img" src="card-back.webp" alt="" loading="lazy" />
+        </div>
+        <div class="card__face">
+          <div class="card__num">${card.num}</div>
+          <div class="card__emblem">${emblem(card.num)}</div>
+          <div class="card__name">${card.name}</div>
+        </div>
+      </div>`;
+    btn.addEventListener('click', () => revealCard(i));
+    spreadEl.appendChild(btn);
+    requestAnimationFrame(() => { btn.style.opacity = '1'; btn.style.transform = 'translateY(0) rotateY(0)'; });
+  });
+  document.getElementById('hint').textContent = 'Сосредоточьтесь на вопросе и коснитесь первой карты';
+}
+
+function showCardInPanel(card, position) {
+  const panel = document.getElementById('reading');
+  panel.innerHTML = `
+    <p class="draw__hint">${position}</p>
+    <h3 class="card-title">${card.num} · ${card.name}</h3>
+    <p class="card-keyword">${card.keyword}</p>
+    <p class="card-meaning">${card.meaning}</p>`;
+}
+
+function buildSynthesis() {
+  const [p, n, f] = drawOrder;
+  const chips = document.getElementById('chips');
+  chips.innerHTML = drawOrder.map((card, i) => {
+    const chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.setAttribute('role', 'listitem');
+    chip.style.animationDelay = (0.1 + i * 0.1) + 's';
+    chip.setAttribute('aria-label', `Показать значение карты ${SPREAD_LABELS[i]}: ${card.name}`);
+    chip.innerHTML = `<span class="chip__pos">${SPREAD_LABELS[i]}</span><span class="chip__name">${card.name}</span><span class="chip__kw">${card.essence}</span>`;
+    chip.addEventListener('click', () => showCardInPanel(card, SPREAD_LABELS[i]));
+    return chip;
+  }).map(c => c.outerHTML).join('');
+
+  document.getElementById('synthesisText').innerHTML =
+    `Ваши три карты рисуют путь от «${p.essence}» через «${n.essence}» к «${f.essence}». ` +
+    `<b>${p.name}</b> в прошлом заложил основу — ${p.advice}. ` +
+    `Сейчас <b>${n.name}</b> говорит о настоящем: ${n.advice}. ` +
+    `Впереди <b>${f.name}</b> несёт энергию «${f.essence}» — ${f.advice}.`;
+  document.getElementById('synthesisAdvice').textContent =
+    `Общий смысл: ${p.advice}, затем ${n.advice} — и впереди ${f.advice}. Единство трёх архетипов подсказывает идти этим путём осознанно, доверяя и прошлому, и тому, что только зарождается.`;
+}
+
+function revealCard(i) {
+  const cardEl = spreadEl.children[i];
+  const card = drawOrder[i];
+  if (!cardEl.classList.contains('flipped')) {
+    cardEl.classList.add('flipped');
+  }
+  showCardInPanel(card, SPREAD_LABELS[i]);
+  const revealed = [...spreadEl.children].filter(c => c.classList.contains('flipped')).length;
+  if (revealed === 3) {
+    const synth = document.getElementById('synthesis');
+    buildSynthesis();
+    synth.hidden = false;
+    synth.style.opacity = '0'; synth.style.transform = 'translateY(20px)';
+    requestAnimationFrame(() => { synth.style.opacity = '1'; synth.style.transform = 'translateY(0)'; });
+    const r = document.getElementById('reset');
+    r.style.display = 'inline-flex';
+    r.style.opacity = '0'; r.style.transform = 'translateY(10px)';
+    requestAnimationFrame(() => { r.style.opacity = '1'; r.style.transform = 'translateY(0)'; });
+  }
+}
+
+document.getElementById('reset').addEventListener('click', () => {
+  buildSpread();
+  const panel = document.getElementById('reading');
+  panel.innerHTML = '<p class="draw__hint" id="hint">Коснитесь карты, чтобы открыть её значение</p>';
+  const synth = document.getElementById('synthesis');
+  synth.hidden = true;
+  document.getElementById('reset').style.display = 'none';
+});
+
+buildSpread();
+
+/* ===== Build gallery ===== */
+const gallery = document.getElementById('gallery');
+CARDS.forEach((card) => {
+  const item = document.createElement('button');
+  item.className = 'mini-card reveal';
+  item.setAttribute('role', 'listitem');
+  item.setAttribute('aria-label', `${card.num} ${card.name} — открыть значение`);
+  item.innerHTML = `
+    <div class="mini-card__num">${card.num}</div>
+    <div class="mini-card__emblem">${emblem(card.num)}</div>
+    <div class="mini-card__name">${card.name}</div>`;
+  item.addEventListener('click', () => openModal(card));
+  gallery.appendChild(item);
+});
+
+/* ===== Modal ===== */
+const modal = document.getElementById('modal');
+function openModal(card) {
+  document.getElementById('modalEmblem').innerHTML = emblem(card.num);
+  document.getElementById('modalNum').textContent = card.num;
+  document.getElementById('modalName').textContent = card.name;
+  document.getElementById('modalKeyword').textContent = card.keyword;
+  document.getElementById('modalMeaning').textContent = card.meaning;
+  document.getElementById('modalUp').textContent = card.upright;
+  document.getElementById('modalRev').textContent = card.reversed;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+modal.addEventListener('click', (e) => { if (e.target.matches('[data-close]')) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+/* ===== Theme toggle ===== */
+(function () {
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+  r.setAttribute('data-theme', d);
+  const setIcon = () => {
+    t.innerHTML = d === 'dark'
+      ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>'
+      : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+    t.setAttribute('aria-label', d === 'dark' ? 'Переключить на светлую тему' : 'Переключить на тёмную тему');
+  };
+  setIcon();
+  t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+    setIcon();
+  });
+})();
+
+/* ===== Header scroll + mobile nav ===== */
+const header = document.getElementById('header');
+const nav = document.getElementById('nav');
+const navToggle = document.getElementById('navToggle');
+addEventListener('scroll', () => {
+  header.classList.toggle('header--scrolled', scrollY > 40);
+}, { passive: true });
+navToggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', open);
+});
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); navToggle.setAttribute('aria-expanded', false); }));
+
+/* ===== Magnetic CTA ===== */
+(function () {
+  const cta = document.getElementById('heroCta');
+  if (!cta) return;
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  cta.addEventListener('mousemove', (e) => {
+    const rect = cta.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    cta.style.transform = `translate(${x * 0.2}px, ${y * 0.3}px)`;
+  });
+  cta.addEventListener('mouseleave', () => { cta.style.transform = ''; });
+})();
+
+/* ===== Fallback: scroll reveal via IntersectionObserver if no view-timeline ===== */
+if (!CSS.supports('animation-timeline: view()')) {
+  document.documentElement.classList.add('no-viewtimelines');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.style.opacity = '1'; en.target.style.transform = 'translateY(0)'; io.unobserve(en.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.opacity = '0'; el.style.transform = 'translateY(28px)';
+    el.style.transition = `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${i % 5 * 0.06}s, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${i % 5 * 0.06}s`;
+    io.observe(el);
+  });
+}
+</script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
